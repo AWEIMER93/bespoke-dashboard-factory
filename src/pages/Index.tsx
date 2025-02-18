@@ -20,7 +20,7 @@ const portfolioData = [
     units: 104,
     value: 1721.3,
     change: 0.74,
-    logo: "/lovable-uploads/c873c3fd-b993-49ec-a71c-032451751303.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
   },
   {
     symbol: "TSLA",
@@ -28,7 +28,7 @@ const portfolioData = [
     units: 124,
     value: 1521.3,
     change: 0.74,
-    logo: "/lovable-uploads/c873c3fd-b993-49ec-a71c-032451751303.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png",
   },
   {
     symbol: "MSFT",
@@ -36,7 +36,7 @@ const portfolioData = [
     units: 10,
     value: 1721.3,
     change: 0.74,
-    logo: "/lovable-uploads/c873c3fd-b993-49ec-a71c-032451751303.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/25/Microsoft_icon.svg",
   },
   {
     symbol: "GOOGL",
@@ -44,7 +44,7 @@ const portfolioData = [
     units: 110,
     value: 1721.3,
     change: 0.74,
-    logo: "/lovable-uploads/c873c3fd-b993-49ec-a71c-032451751303.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg",
   },
   {
     symbol: "NVDA",
@@ -52,7 +52,7 @@ const portfolioData = [
     units: 104,
     value: 1721.3,
     change: 0.74,
-    logo: "/lovable-uploads/c873c3fd-b993-49ec-a71c-032451751303.png",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg",
   },
 ];
 

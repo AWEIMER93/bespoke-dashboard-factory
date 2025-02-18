@@ -21,7 +21,13 @@ export const PortfolioCard = ({
   return (
     <div className="glass-panel p-4">
       <div className="flex items-center space-x-3">
-        <img src={logo} alt={name} className="w-8 h-8" />
+        <div className="w-8 h-8 flex items-center justify-center">
+          <img 
+            src={logo} 
+            alt={name} 
+            className="w-6 h-6 object-contain filter brightness-0 invert" 
+          />
+        </div>
         <div className="flex-1">
           <p className="font-semibold">{symbol}</p>
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
