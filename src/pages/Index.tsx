@@ -88,7 +88,7 @@ export default function Index() {
               <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary" />
             </button>
             <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="text-sm font-medium text-primary">N</span>
+              <span className="text-sm font-medium text-primary">A</span>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function Index() {
         <div className="p-8">
           <div className="flex items-start justify-between mb-8">
             <div>
-              <h1 className="text-4xl font-bold mb-1">Welcome, Naya</h1>
+              <h1 className="text-4xl font-bold mb-1">Welcome, Anthony</h1>
               <p className="text-muted-foreground">
                 Here's your stock portfolio overview
               </p>
