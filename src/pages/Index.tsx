@@ -1,8 +1,17 @@
 
-import { LineChart } from "lucide-react";
+import { LineChart, Bell, Search } from "lucide-react";
 import { Sidebar } from "@/components/Sidebar";
 import { PortfolioCard } from "@/components/PortfolioCard";
 import { useState } from "react";
+import {
+  LineChart as RechartsLineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const portfolioData = [
   {
@@ -47,6 +56,15 @@ const portfolioData = [
   },
 ];
 
+const chartData = [
+  { date: "Jan", value: 10000 },
+  { date: "Feb", value: 12000 },
+  { date: "Mar", value: 11000 },
+  { date: "Apr", value: 13000 },
+  { date: "May", value: 12500 },
+  { date: "Jun", value: 14000 },
+];
+
 export default function Index() {
   const [timeframe, setTimeframe] = useState("6M");
 
@@ -54,6 +72,27 @@ export default function Index() {
     <div className="min-h-screen flex">
       <Sidebar />
       <main className="flex-1 pl-64">
+        {/* Top Banner */}
+        <div className="h-16 border-b border-white/10 bg-secondary/30 backdrop-blur-sm flex items-center justify-between px-8">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Search stocks..."
+              className="h-10 w-[280px] rounded-full bg-white/5 pl-10 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            />
+          </div>
+          <div className="flex items-center space-x-4">
+            <button className="relative p-2 hover:bg-white/5 rounded-full">
+              <Bell className="h-5 w-5" />
+              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary" />
+            </button>
+            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+              <span className="text-sm font-medium text-primary">N</span>
+            </div>
+          </div>
+        </div>
+
         <div className="p-8">
           <div className="flex items-start justify-between mb-8">
             <div>
@@ -70,7 +109,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-3 gap-6 mb-8">
             <div className="glass-panel p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-semibold">Total Holding</h2>
@@ -79,6 +118,26 @@ export default function Index() {
               <div>
                 <p className="text-4xl font-bold mb-2">$ 12,304.11</p>
                 <p className="text-sm text-green-400">+3.5% ($ 532)</p>
+              </div>
+            </div>
+            <div className="glass-panel p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold">Total Profit</h2>
+                <div className="text-sm text-muted-foreground">6M</div>
+              </div>
+              <div>
+                <p className="text-4xl font-bold mb-2">$ 2,156.89</p>
+                <p className="text-sm text-green-400">+12.3% ($ 234)</p>
+              </div>
+            </div>
+            <div className="glass-panel p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold">Total Investment</h2>
+                <div className="text-sm text-muted-foreground">6M</div>
+              </div>
+              <div>
+                <p className="text-4xl font-bold mb-2">$ 10,147.22</p>
+                <p className="text-sm text-muted-foreground">5 Active stocks</p>
               </div>
             </div>
           </div>
@@ -114,8 +173,44 @@ export default function Index() {
                 ))}
               </div>
             </div>
-            <div className="h-[300px] flex items-center justify-center text-muted-foreground">
-              Chart placeholder - Implement with recharts
+            <div className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <RechartsLineChart data={chartData}>
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke="rgba(255,255,255,0.1)"
+                    vertical={false}
+                  />
+                  <XAxis
+                    dataKey="date"
+                    stroke="rgba(255,255,255,0.5)"
+                    tickLine={false}
+                    axisLine={false}
+                  />
+                  <YAxis
+                    stroke="rgba(255,255,255,0.5)"
+                    tickLine={false}
+                    axisLine={false}
+                    tickFormatter={(value) => `$${value}`}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "rgba(17, 24, 39, 0.9)",
+                      border: "none",
+                      borderRadius: "8px",
+                      boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                    }}
+                    labelStyle={{ color: "rgba(255,255,255,0.7)" }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="value"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                </RechartsLineChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>
