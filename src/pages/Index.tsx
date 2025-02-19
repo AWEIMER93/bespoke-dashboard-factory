@@ -57,7 +57,7 @@ const chartData = [
 
 export default function Index() {
   useEffect(() => {
-    const apiKey = process.env.FINNHUB_API_KEY;
+    const apiKey = import.meta.env.VITE_FINNHUB_API_KEY;
     if (apiKey) {
       const finnhubClient = new finnhub.ApiClient();
       finnhubClient.authentications['api_key'].apiKey = apiKey;
