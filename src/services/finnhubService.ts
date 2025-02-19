@@ -12,8 +12,12 @@ interface StockQuote {
   pc: number; // Previous close price
 }
 
-// Initialize the Finnhub client
+// Initialize the Finnhub client with API key
+const apiKey = import.meta.env.VITE_FINNHUB_API_KEY;
 const finnhubClient = new finnhub.ApiClient();
+if (apiKey) {
+  finnhubClient.authentications['api_key'].apiKey = apiKey;
+}
 
 export const getStockQuote = async (symbol: string): Promise<StockQuote> => {
   return new Promise((resolve, reject) => {

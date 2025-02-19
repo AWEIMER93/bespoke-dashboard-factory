@@ -5,8 +5,6 @@ import { PortfolioCard } from "@/components/PortfolioCard";
 import { TopBanner } from "@/components/TopBanner";
 import { StatsCard } from "@/components/StatsCard";
 import { PerformanceChart } from "@/components/PerformanceChart";
-import { useEffect } from "react";
-import * as finnhub from 'finnhub';
 
 const portfolioData = [
   {
@@ -56,14 +54,6 @@ const chartData = [
 ];
 
 export default function Index() {
-  useEffect(() => {
-    const apiKey = import.meta.env.VITE_FINNHUB_API_KEY;
-    if (apiKey) {
-      const finnhubClient = new finnhub.ApiClient();
-      finnhubClient.authentications['api_key'].apiKey = apiKey;
-    }
-  }, []);
-
   return (
     <div className="min-h-screen flex bg-gradient-to-b from-background to-secondary/20">
       <Sidebar />
