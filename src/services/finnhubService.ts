@@ -24,9 +24,15 @@ export const getStockQuote = async (symbol: string): Promise<StockQuote> => {
     const finnhubApi = new finnhub.DefaultApi(finnhubClient);
     finnhubApi.quote(symbol, (error: any, data: StockQuote, response: any) => {
       if (error) {
+        console.error('Finnhub API error:', error);
         reject(error);
       } else {
-        resolve(data);
+        console.log(`Quote data for ${symbol}:`, data);
+        if (data && typeof data.dp === 'number') {
+          resolve(data);
+        } else {
+          reject(new Error('Invalid quote data received'));
+        }
       }
     });
   });

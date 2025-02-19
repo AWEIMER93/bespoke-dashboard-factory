@@ -15,11 +15,14 @@ export const PortfolioCard = ({
   units,
   logo,
 }: PortfolioCardProps) => {
-  const { data: quote, isLoading } = useStockQuote(symbol);
+  const { data: quote, isLoading, error } = useStockQuote(symbol);
   
+  if (error) {
+    console.error(`Error fetching quote for ${symbol}:`, error);
+  }
+
   const currentValue = quote ? units * quote.c : 0;
-  // Use the daily percentage change directly from the API
-  const change = quote ? quote.dp : 0;
+  const change = quote?.dp ?? 0;
   const isPositive = change >= 0;
 
   return (
