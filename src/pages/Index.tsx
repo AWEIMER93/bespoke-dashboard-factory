@@ -6,7 +6,7 @@ import { TopBanner } from "@/components/TopBanner";
 import { StatsCard } from "@/components/StatsCard";
 import { PerformanceChart } from "@/components/PerformanceChart";
 import { useEffect } from "react";
-import finnhub from 'finnhub';
+import * as finnhub from 'finnhub';
 
 const portfolioData = [
   {
@@ -59,8 +59,8 @@ export default function Index() {
   useEffect(() => {
     const apiKey = process.env.FINNHUB_API_KEY;
     if (apiKey) {
-      const api_key = finnhub.ApiClient.instance.authentications['api_key'];
-      api_key.apiKey = apiKey;
+      const finnhubClient = new finnhub.ApiClient();
+      finnhubClient.authentications['api_key'].apiKey = apiKey;
     }
   }, []);
 

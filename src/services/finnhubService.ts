@@ -1,5 +1,5 @@
 
-import finnhub from 'finnhub';
+import * as finnhub from 'finnhub';
 import { useQuery } from '@tanstack/react-query';
 
 interface StockQuote {
@@ -12,11 +12,13 @@ interface StockQuote {
   pc: number; // Previous close price
 }
 
-const finnhubClient = new finnhub.DefaultApi();
+// Initialize the Finnhub client
+const finnhubClient = new finnhub.ApiClient();
 
 export const getStockQuote = async (symbol: string): Promise<StockQuote> => {
   return new Promise((resolve, reject) => {
-    finnhubClient.quote(symbol, (error: any, data: StockQuote, response: any) => {
+    const finnhubApi = new finnhub.DefaultApi(finnhubClient);
+    finnhubApi.quote(symbol, (error: any, data: StockQuote, response: any) => {
       if (error) {
         reject(error);
       } else {
