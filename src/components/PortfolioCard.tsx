@@ -18,8 +18,8 @@ export const PortfolioCard = ({
   const { data: quote, isLoading } = useStockQuote(symbol);
   
   const currentValue = quote ? units * quote.c : 0;
-  // Calculate percentage change from previous close
-  const change = quote ? ((quote.c - quote.pc) / quote.pc) * 100 : 0;
+  // Use the daily percentage change directly from the API
+  const change = quote ? quote.dp : 0;
   const isPositive = change >= 0;
 
   return (
