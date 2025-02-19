@@ -5,6 +5,8 @@ import { PortfolioCard } from "@/components/PortfolioCard";
 import { TopBanner } from "@/components/TopBanner";
 import { StatsCard } from "@/components/StatsCard";
 import { PerformanceChart } from "@/components/PerformanceChart";
+import { useEffect } from "react";
+import finnhub from 'finnhub';
 
 const portfolioData = [
   {
@@ -12,7 +14,6 @@ const portfolioData = [
     name: "Apple Inc.",
     units: 104,
     value: 1721.3,
-    change: 0.74,
     logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
   },
   {
@@ -20,7 +21,6 @@ const portfolioData = [
     name: "Tesla Inc.",
     units: 124,
     value: 1521.3,
-    change: 0.74,
     logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png",
   },
   {
@@ -28,7 +28,6 @@ const portfolioData = [
     name: "Microsoft Corporation",
     units: 10,
     value: 1721.3,
-    change: 0.74,
     logo: "https://upload.wikimedia.org/wikipedia/commons/2/25/Microsoft_icon.svg",
   },
   {
@@ -36,7 +35,6 @@ const portfolioData = [
     name: "Alphabet Inc.",
     units: 110,
     value: 1721.3,
-    change: 0.74,
     logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg",
   },
   {
@@ -44,7 +42,6 @@ const portfolioData = [
     name: "NVIDIA Corporation",
     units: 104,
     value: 1721.3,
-    change: 0.74,
     logo: "https://upload.wikimedia.org/wikipedia/commons/2/21/Nvidia_logo.svg",
   },
 ];
@@ -59,6 +56,14 @@ const chartData = [
 ];
 
 export default function Index() {
+  useEffect(() => {
+    const apiKey = process.env.FINNHUB_API_KEY;
+    if (apiKey) {
+      const api_key = finnhub.ApiClient.instance.authentications['api_key'];
+      api_key.apiKey = apiKey;
+    }
+  }, []);
+
   return (
     <div className="min-h-screen flex bg-gradient-to-b from-background to-secondary/20">
       <Sidebar />

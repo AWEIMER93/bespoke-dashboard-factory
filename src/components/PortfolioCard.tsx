@@ -1,10 +1,11 @@
 
+import { useStockQuote } from "@/services/finnhubService";
+
 interface PortfolioCardProps {
   symbol: string;
   name: string;
   units: number;
   value: number;
-  change: number;
   logo: string;
 }
 
@@ -12,14 +13,21 @@ export const PortfolioCard = ({
   symbol,
   name,
   units,
-  value,
-  change,
   logo,
 }: PortfolioCardProps) => {
+  const { data: quote, isLoading } = useStockQuote(symbol);
+  
+  const currentValue = quote ? units * quote.c : 0;
+  const change = quote ? quote.dp : 0;
   const isPositive = change >= 0;
 
   return (
-    <div className="glass-panel p-4">
+    <div className="glass-panel p-4 relative overflow-hidden">
+      {isLoading && (
+        <div className="absolute inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center">
+          <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
       <div className="flex items-center space-x-3">
         <div className="w-8 h-8 flex items-center justify-center">
           <img 
@@ -35,14 +43,14 @@ export const PortfolioCard = ({
           </div>
         </div>
         <div className="text-right">
-          <p className="font-semibold">${value.toLocaleString()}</p>
+          <p className="font-semibold">${currentValue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
           <p
             className={`text-sm ${
               isPositive ? "text-green-400" : "text-red-400"
             }`}
           >
             {isPositive ? "+" : ""}
-            {change}%
+            {change.toFixed(2)}%
           </p>
         </div>
       </div>
